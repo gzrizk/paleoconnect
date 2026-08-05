@@ -14,7 +14,10 @@ license = "BSD-3-Clause"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
 classifiers = [
-  "Development Status :: 1 - Planning",
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Education",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: GIS",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
@@ -30,7 +33,11 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.0",
+  "pygplates",
+]
 
 [project.urls]
 Homepage = "https://github.com/gzrizk/paleoconnect"
@@ -38,6 +45,14 @@ Homepage = "https://github.com/gzrizk/paleoconnect"
 Discussions = "https://github.com/gzrizk/paleoconnect/discussions"
 Changelog = "https://github.com/gzrizk/paleoconnect/releases"
 
+[project.scripts]
+paleoconnect = "paleoconnect.cli:main"
+
+[project.optional-dependencies]
+plot = [
+  "matplotlib>=3.8",
+  "plotly>=5.0",
+]
 
 [dependency-groups]
 test = [
@@ -46,6 +61,7 @@ test = [
 ]
 dev = [
   { include-group = "test" },
+  "ruff>=0.11",
 ]
 docs = [
   "sphinx>=7.0",
@@ -156,6 +172,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
+"src/paleoconnect/cli.py" = ["T20"]
 
 
 [tool.pylint]
