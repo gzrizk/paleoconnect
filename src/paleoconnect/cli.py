@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from .landmasses import LandmassDefinitions
 from .model import ConnectivityModel
 
 
@@ -30,10 +29,18 @@ def main(argv: list[str] | None = None) -> None:
         help="Topology file(s) (.gpml)",
     )
     run_parser.add_argument(
-        "--landmasses",
+        "--proxies",
         required=True,
-        type=Path,
-        help="Landmass definitions (.toml)",
+        nargs="+",
+        type=int,
+        help="Plate IDs representing each landmass in path order",
+    )
+    run_parser.add_argument(
+        "--names",
+        required=True,
+        nargs="+",
+        type=str,
+        help="Landmass names in the same order as --proxies",
     )
     run_parser.add_argument(
         "--from",
@@ -66,13 +73,18 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
 
     if args.command == "run":
-        defs = LandmassDefinitions.from_toml(args.landmasses)
+        if len(args.proxies) != len(args.names):
+            parser.error(
+                f"--proxies ({len(args.proxies)}) and --names ({len(args.names)}) "
+                "must have the same length"
+            )
         model = ConnectivityModel(
             rotation_files=args.rotations,
             topology_files=args.topologies,
-            landmasses=defs,
         )
-        result = model.run(
+        result = model.run_path(
+            proxies=args.proxies,
+            names=args.names,
             start_time=args.start_time,
             end_time=args.end_time,
             time_step=args.step,

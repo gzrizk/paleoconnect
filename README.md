@@ -25,20 +25,20 @@ pip install "paleoconnect[plot]"
 ## Quickstart
 
 ```python
-from paleoconnect import ConnectivityModel, LandmassDefinitions
-
-defs = LandmassDefinitions.from_dict({
-    "euramerica": [101, 102],
-    "south_china": [311, 312],
-})
+from paleoconnect import ConnectivityModel
 
 model = ConnectivityModel(
     rotation_files=["model.rot"],
     topology_files=["model.gpml"],
-    landmasses=defs,
 )
 
-result = model.run(start_time=359, end_time=252, time_step=1)
+result = model.run_path(
+    proxies=[101, 601, 602],
+    names=["Euramerica", "NorthChina", "SouthChina"],
+    start_time=324,
+    end_time=251,
+    time_step=1,
+)
 result.to_csv("gaps.csv")
 print(result.summary())
 ```

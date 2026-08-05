@@ -12,12 +12,11 @@ paleoconnect/
 ├── src/paleoconnect/         # Package source (src layout)
 │   ├── __init__.py           # Public API
 │   ├── model.py              # ConnectivityModel
-│   ├── landmasses.py         # LandmassDefinitions
 │   ├── result.py             # ConnectivityResult
 │   └── cli.py                # CLI entry point
 ├── tests/                    # Pytest suite
 ├── docs/                     # Sphinx + MyST documentation
-└── data/                     # Not tracked — model files (.rot, .gpml)
+└── data/                     # Not tracked — plate model files (.rot, .gpml)
 ```
 
 ## Toolchain
@@ -38,9 +37,8 @@ uv run pre-commit run -a # run all hooks
 ```
 
 ## Data conventions
-- Tectonic model files (.rot, .gpml) live in `data/models/` (gitignored)
-- Landmass-to-plate-ID mappings: TOML format, see `docs/` for examples
-- Users source model files independently (licensing)
+- Tectonic model files (.rot, .gpml) live in `data/plate_models/` (gitignored)
+- Landmasses are derived automatically from the rotation model via `ReconstructionTree`
 
 ## Publication strategy
 - Package: PyPI (trusted publisher via GitHub Actions)
