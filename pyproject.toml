@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 [project]
 name = "paleoconnect"
 authors = [
-  { name = "Gonzalo Rizik", email = "gzrizk@example.com" },
+  { name = "Gonzalo Rodriguez Rizk", email = "gzrizk@example.com" },
 ]
 description = "Palaeogeographic connectivity analysis for biogeographic dispersal studies"
 readme = "README.md"
