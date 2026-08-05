@@ -1,31 +1,59 @@
 # paleoconnect
 
-[![Actions Status][actions-badge]][actions-link]
-[![Documentation Status][rtd-badge]][rtd-link]
+[![Actions Status][actions-badge]][actions]
+[![PyPI version][pypi-badge]][pypi]
+[![Documentation Status][rtd-badge]][rtd]
 
-[![PyPI version][pypi-version]][pypi-link]
-[![Conda-Forge][conda-badge]][conda-link]
-[![PyPI platforms][pypi-platforms]][pypi-link]
+**Palaeogeographic connectivity analysis for biogeographic dispersal studies.**
 
-[![GitHub Discussion][github-discussions-badge]][github-discussions-link]
+Quantify the minimum oceanic gap between geographic entities
+(continents, shallow marine platforms, island arcs) through geological time
+using pyGPlates plate tectonic reconstructions.
 
-[![Coverage][coverage-badge]][coverage-link]
+## Installation
 
-<!-- SPHINX-START -->
+```bash
+pip install paleoconnect
+```
 
-<!-- prettier-ignore-start -->
-[actions-badge]:            https://github.com/gzrizk/paleoconnect/actions/workflows/ci.yml/badge.svg
-[actions-link]:             https://github.com/gzrizk/paleoconnect/actions
-[conda-badge]:              https://img.shields.io/conda/vn/conda-forge/paleoconnect
-[conda-link]:               https://github.com/conda-forge/paleoconnect-feedstock
-[github-discussions-badge]: https://img.shields.io/static/v1?label=Discussions&message=Ask&color=blue&logo=github
-[github-discussions-link]:  https://github.com/gzrizk/paleoconnect/discussions
-[pypi-link]:                https://pypi.org/project/paleoconnect/
-[pypi-platforms]:           https://img.shields.io/pypi/pyversions/paleoconnect
-[pypi-version]:             https://img.shields.io/pypi/v/paleoconnect
-[rtd-badge]:                https://readthedocs.org/projects/paleoconnect/badge/?version=latest
-[rtd-link]:                 https://paleoconnect.readthedocs.io/en/latest/?badge=latest
-[coverage-badge]:           https://codecov.io/github/gzrizk/paleoconnect/branch/main/graph/badge.svg
-[coverage-link]:            https://codecov.io/github/gzrizk/paleoconnect
+For plotting support:
 
-<!-- prettier-ignore-end -->
+```bash
+pip install "paleoconnect[plot]"
+```
+
+## Quickstart
+
+```python
+from paleoconnect import ConnectivityModel, LandmassDefinitions
+
+defs = LandmassDefinitions.from_dict({
+    "euramerica": [101, 102],
+    "south_china": [311, 312],
+})
+
+model = ConnectivityModel(
+    rotation_files=["model.rot"],
+    topology_files=["model.gpml"],
+    landmasses=defs,
+)
+
+result = model.run(start_time=359, end_time=252, time_step=1)
+result.to_csv("gaps.csv")
+print(result.summary())
+```
+
+## Documentation
+
+Full documentation at [paleoconnect.readthedocs.io][rtd].
+
+## License
+
+BSD-3-Clause. See [LICENSE](LICENSE).
+
+[actions-badge]: https://github.com/gzrizk/paleoconnect/workflows/CI/badge.svg
+[actions]: https://github.com/gzrizk/paleoconnect/actions
+[pypi-badge]: https://img.shields.io/pypi/v/paleoconnect.svg
+[pypi]: https://pypi.org/project/paleoconnect/
+[rtd-badge]: https://readthedocs.org/projects/paleoconnect/badge/
+[rtd]: https://paleoconnect.readthedocs.io/

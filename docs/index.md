@@ -7,7 +7,6 @@
 ```
 
 ```{include} ../README.md
-:start-after: <!-- SPHINX-START -->
 ```
 
 ## Indices and tables

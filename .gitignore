@@ -184,3 +184,7 @@ Thumbs.db
 # Common editor files
 *~
 *.swp
+
+# Project data
+data/models/
+data/raw/
