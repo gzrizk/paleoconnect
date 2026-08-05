@@ -1,0 +1,14 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2026.06.18-29-ga930c46
+_src_path: gh:scientific-python/cookie
+backend: hatch
+docs: sphinx
+email: gzrizk@example.com
+full_name: Gonzalo Rizik
+license: BSD
+org: gzrizk
+project_name: paleoconnect
+project_short_description: Palaeogeographic connectivity analysis for biogeographic
+    dispersal studies
+url: https://github.com/gzrizk/paleoconnect
+vcs: true
